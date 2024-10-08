@@ -1,0 +1,6 @@
+# Prevent configs from being counted
+*.config.js -linguist-detectable
+*.config.ts -linguist-detectable
+
+# Force .ts to be detected as Typescript
+*.ts linguist-language=TypeScript
