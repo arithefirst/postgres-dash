@@ -1,7 +1,6 @@
 import {json} from "@sveltejs/kit";
-import sql from "./sql";
 
-export async function GET() {
-    const db = await sql`SELECT * FROM users`;
-    return json(db);
+export async function GET({ params }) {
+    const err = {"error": "you must make a query to /api/db/$COL/$QUERY"}
+    return json(err);
 }
