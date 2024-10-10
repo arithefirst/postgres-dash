@@ -1,44 +1,17 @@
 <script lang="ts">
-    const table = "dummy"
+    import HtmlTable from "\$lib/html-table.svelte";
+    import TablesDropdown from "\$lib/tables-dropdown.svelte";
 
-   // Get the contents of the table
-    let sqlResponse = fetchData()
-    async function fetchData() {
-        let response = await fetch(`/api/db/all/${table}`);
-        return await response.json();
-    }
+    let tablesCount: number;
+    const table = "dummy";
 
-    let cols = fetchCols()
-    async function fetchCols() {
-        let response = await fetch(`/api/db/cols/${table}`);
-        return await response.json();
-    }
+    $: console.log(`tc: ${tablesCount}`);
 </script>
 
-<div class="overflow-x-auto w-11/12 absolute left-1/2 -translate-x-1/2 top-4">
-    <div class="rounded-xl border-2 border-base-300 overflow-scroll">
-        <table class="table table-zebra rounded-xl">
-            <thead>
-                <tr>
-                    {#await cols then data}
-                        {#each data as col}
-                            <th class="text-base-content">{col}</th>
-                        {/each}
-                    {/await}
-                </tr>
-            </thead>
-            <tbody>
-                {#await sqlResponse then data}
-                    {#each data as entry}
-                        <tr>
-                            {#each Object.entries(entry) as [,value]}
-                                <td>{value}</td>
-                            {/each}
-                        </tr>
-                    {/each}
-                {/await}
-            </tbody>
-        </table>
-    </div>
-    <div class="h-4"/>
-</div>
+<TablesDropdown
+    bind:tablesCount={tablesCount}
+/>
+
+{#if tablesCount !== 0}
+    <HtmlTable {table}/>
+{/if}
