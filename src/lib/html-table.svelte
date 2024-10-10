@@ -2,21 +2,21 @@
     export let table: string
 
     // Get the contents of the table
-    let sqlResponse = fetchData()
-    async function fetchData() {
-        let response = await fetch(`/api/db/all/${table}`);
+    let sqlResponse; $: sqlResponse = fetchData(table)
+    async function fetchData(tableName: string) {
+        let response = await fetch(`/api/db/all/${tableName}`);
         return await response.json();
     }
 
     // Get the columns in the table
-    let cols = fetchCols()
-    async function fetchCols() {
-        let response = await fetch(`/api/db/cols/${table}`);
+    let cols; $: cols = fetchCols(table)
+    async function fetchCols(tableName: string) {
+        let response = await fetch(`/api/db/cols/${tableName}`);
         return await response.json();
     }
 </script>
 
-<div class="overflow-x-auto w-11/12 absolute left-1/2 -translate-x-1/2 top-4">
+<div class="overflow-x-auto w-10/12 absolute left-1/2 -translate-x-1/2 top-4">
     <div class="rounded-xl border-2 border-base-300 overflow-scroll">
         <table class="table table-zebra rounded-xl">
             <thead>

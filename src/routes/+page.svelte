@@ -3,15 +3,15 @@
     import TablesDropdown from "\$lib/tables-dropdown.svelte";
 
     let tablesCount: number;
-    const table = "dummy";
-
-    $: console.log(`tc: ${tablesCount}`);
+    let currentTable: string;
 </script>
 
 <TablesDropdown
     bind:tablesCount={tablesCount}
+    bind:currentTable={currentTable}
+    className="z-10"
 />
 
 {#if tablesCount !== 0}
-    <HtmlTable {table}/>
+    <HtmlTable table={currentTable}/>
 {/if}
