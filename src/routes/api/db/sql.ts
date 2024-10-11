@@ -5,6 +5,7 @@ const sql = postgres({
     username: 'postgres',
     password: 'postgres',
     database: 'example',
+    debug: true,
 })
 
 export default sql

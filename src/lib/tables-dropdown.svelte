@@ -2,24 +2,18 @@
     import {onMount} from "svelte";
 
     export let className: string
-    export let tablesCount: number
     export let currentTable: string
 
     async function getTables() {
         const response = await fetch("/api/db/tables")
         let data = await response.json()
-        return Array.isArray(data) ? data : [data];
+        return data["data"];
     }
 
-    let tables: any[]
+    let tables: any
     onMount(async () => {
         tables = await getTables();
-        if (tables[0].message == "Internal Error") {
-            tablesCount = 0
-        } else {
-            currentTable = tables[0];
-            tablesCount = tables.length;
-        }
+        currentTable = tables[0]
     })
 </script>
 

@@ -1,18 +1,40 @@
 <script lang="ts">
     export let table: string
+    export let tableError: any[]
+    export let colError: any[]
 
     // Get the contents of the table
     let sqlResponse; $: sqlResponse = fetchData(table)
     async function fetchData(tableName: string) {
         let response = await fetch(`/api/db/all/${tableName}`);
-        return await response.json();
+        let json = await response.json();
+        if (json["error"] === null) {
+            tableError = [false, null]
+            return json["data"]
+        } else {
+            if (json["error"]["stack"].includes(`relation "undefined" does`)) {
+                tableError = [false, null]
+            } else {
+                tableError = [true, json["error"]]
+            }
+        }
     }
 
     // Get the columns in the table
     let cols; $: cols = fetchCols(table)
     async function fetchCols(tableName: string) {
         let response = await fetch(`/api/db/cols/${tableName}`);
-        return await response.json();
+        let json = await response.json();
+        if (json["error"] === null) {
+            colError = [false, null]
+            return json["data"]
+        } else {
+            if (json["error"]["stack"].includes(`relation "undefined" does`)) {
+                colError = [false, null]
+            } else {
+                colError = [true, json["error"]]
+            }
+        }
     }
 </script>
 
