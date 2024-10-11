@@ -16,7 +16,7 @@
     }
 </script>
 
-<div class="overflow-x-auto w-10/12 absolute left-1/2 -translate-x-1/2 top-4">
+<div class="overflow-x-auto w-10/12 mt-4 absolute left-1/2 -translate-x-1/2">
     <div class="rounded-xl border-2 border-base-300 overflow-scroll">
         <table class="table table-zebra rounded-xl">
             <thead>
