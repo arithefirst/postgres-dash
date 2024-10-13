@@ -20,7 +20,7 @@
 
 <div class="h-screen md:w-[12.5vw] bg-base-300 fixed rounded-r-xl">
     <div class="relative">
-        <div class="w-11/12 bg-base-200 mx-auto mt-2 h-8 rounded-lg text-center">
+        <div class="w-11/12 bg-base-200 mx-auto mt-2 h-8 rounded-lg text-center leading-8">
             postgres-dash
         </div>
         <br>
